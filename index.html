@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group 1 | Website Making</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-bolt"></i> Group 1
+            </a>
+            
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <button class="dark-mode-toggle" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>GROUP 1</h1>
+            <p>We're a team of IT students who enjoy creating websites, systems, and digital solutions. We focus on making our work fast, accessible, and visually appealing. Every project is a chance for us to learn, grow, and explore new technologies together</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn">View Our Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2>About Our Agency</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>We Transform Ideas Into Digital Reality</h3>
+                    <p>We are a group of students working together with one goal: to learn, collaborate, and deliver the best results we can. Each member contributes unique strengths — from leadership and creativity to research, writing, and problem-solving. We believe in teamwork, respect, and helping each other grow both academically and personally. Together, we strive to create quality outputs while building friendships along the way.</p>
+                    <a href="#team" class="btn">Meet Our Team</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT067L0bAzJTKZGWJZQbYPZe7IXLphlAlLjLrlaP7grfKaMEi1hNZokPhXjxHNncLEhJZg&usqp=CAU" alt="Our team collaborating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team" id="team">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid" id="teamContainer">
+                <!-- Team members will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2>Our Portfolio</h2>
+            <div class="filter-btns">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="excel">Excel</button>
+                <button class="filter-btn" data-filter="powerpoint">Powerpoint</button>
+                <button class="filter-btn" data-filter="word">Word</button>
+            </div>
+            <div class="project-grid" id="projectContainer">
+                <!-- Projects will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>Have a project in mind? We'd love to hear about it. Send us a message and we'll respond as soon as possible.</p>
+                    <div style="margin-top: 30px;">
+                        <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@group1.dev</p>
+                        <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Cavite State University Tanza Campus</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name">
+                            <div class="error" id="nameError">Please enter your name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="your.email@example.com">
+                            <div class="error" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Tell us about your project..."></textarea>
+                            <div class="error" id="messageError">Please enter a message</div>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="logo" style="color: white; justify-content: center; margin-bottom: 20px;">
+                <i class="fas fa-bolt"></i> Group 1
+            </a>
+            <p>Building the future of digital experiences, one project at a time.</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Group 1. All rights reserved. | This is a group project for educational purposes.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
