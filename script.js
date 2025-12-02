@@ -5,7 +5,7 @@ const teamMembers = [
         name: "Denzel Johann Alcantara",
         role: "taga pasa",
         bio: "sir tapos na po",
-         skills: ["Microsoft Proficient", "Python", "JavaScript","HTML","CSS", "Communication"],
+        skills: ["Microsoft Proficient", "Python", "JavaScript","HTML","CSS", "Communication"],
         img: "https://i.redd.it/pf703vsgalmf1.jpeg"
     },
     {
@@ -13,7 +13,7 @@ const teamMembers = [
         name: "Marc Emmanuel Mallari",
         role: "taga luto pancit canton",
         bio: "single, ready to mingle",
-         skills: ["Microsoft Proficient", "Python", "JavaScript", "Communication"],
+        skills: ["Microsoft Proficient", "Python", "JavaScript", "Communication"],
         img: "https://i.redd.it/pf703vsgalmf1.jpeg"
     },
     {
@@ -29,7 +29,7 @@ const teamMembers = [
         name: "Erika Hagos Leron",
         role: "Leader",
         bio: "Small steps. Big goals.",
-         skills: ["Microsoft Proficient", "Python", "JavaScript", "Communication"],
+        skills: ["Microsoft Proficient", "Python", "JavaScript", "Communication"],
         img: "https://i.redd.it/pf703vsgalmf1.jpeg"
     },
     {
@@ -70,17 +70,13 @@ const projects = [
 ];
 
 // DOM Elements
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-const darkModeToggle = document.getElementById('darkModeToggle');
 const teamContainer = document.getElementById('teamContainer');
 const projectContainer = document.getElementById('projectContainer');
-const filterBtns = document.querySelectorAll('.filter-btn');
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing...');
+    
     // Render team members
     renderTeamMembers();
     
@@ -96,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Render team members from data array
 function renderTeamMembers() {
+    if (!teamContainer) return;
+    
     teamContainer.innerHTML = '';
     
     teamMembers.forEach((member, index) => {
@@ -105,7 +103,7 @@ function renderTeamMembers() {
         
         memberElement.innerHTML = `
             <div class="member-img">
-                <img src="${member.img}" alt="${member.name}">
+                <img src="${member.img}" alt="${member.name}" loading="lazy">
             </div>
             <div class="member-info">
                 <h3>${member.name}</h3>
@@ -123,6 +121,8 @@ function renderTeamMembers() {
 
 // Render projects from data array
 function renderProjects(filter) {
+    if (!projectContainer) return;
+    
     projectContainer.innerHTML = '';
     
     const filteredProjects = filter === 'all' 
@@ -136,7 +136,7 @@ function renderProjects(filter) {
         
         projectElement.innerHTML = `
             <div class="project-img">
-                <img src="${project.img}" alt="${project.title}">
+                <img src="${project.img}" alt="${project.title}" loading="lazy">
             </div>
             <div class="project-info">
                 <h3>${project.title}</h3>
@@ -158,31 +158,104 @@ function renderProjects(filter) {
     }, 100);
 }
 
-// Set up all event listeners
-function setupEventListeners() {
-    // Hamburger menu toggle
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.innerHTML = navLinks.classList.contains('active') 
-            ? '<i class="fas fa-times"></i>' 
-            : '<i class="fas fa-bars"></i>';
-    });
+// ===== SIMPLIFIED MOBILE MENU FUNCTIONALITY =====
 
-    // Dark mode toggle
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const icon = darkModeToggle.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.className = 'fas fa-sun';
-        } else {
-            icon.className = 'fas fa-moon';
-        }
+function setupMobileMenu() {
+    console.log('Setting up mobile menu...');
+    
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    if (!hamburger || !navLinks) {
+        console.error('Menu elements not found!');
+        return;
+    }
+    
+    // Add click event to hamburger
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent event bubbling
         
-        // Save preference to localStorage
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        console.log('Hamburger clicked!');
+        
+        // Toggle active class on nav-links
+        navLinks.classList.toggle('active');
+        
+        // Toggle hamburger icon
+        const icon = this.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.className = 'fas fa-times';
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.className = 'fas fa-bars';
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
     });
+    
+    // Close menu when clicking on a nav link
+    const navLinksList = navLinks.querySelectorAll('a');
+    navLinksList.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
+            }
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
+            }
+        }
+    });
+    
+    // Dark mode toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+            
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    }
+    
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true') {
+        document.body.classList.add('dark-mode');
+        const icon = darkModeToggle.querySelector('i');
+        if (icon) {
+            icon.className = 'fas fa-sun';
+        }
+    }
+}
 
+// ===== SETUP EVENT LISTENERS =====
+
+function setupEventListeners() {
+    console.log('Setting up event listeners...');
+    
+    // Setup mobile menu
+    setupMobileMenu();
+    
     // Project filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remove active class from all buttons
@@ -204,10 +277,6 @@ function setupEventListeners() {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-                
                 window.scrollTo({
                     top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
@@ -217,81 +286,122 @@ function setupEventListeners() {
     });
 
     // Form validation and submission
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Reset previous errors and messages
-        resetFormMessages();
-        
-        // Get form values
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-        
-        let isValid = true;
-        
-        // Validate name
-        if (!name) {
-            showError('nameError', 'Please enter your name');
-            isValid = false;
-        }
-        
-        // Validate email
-        if (!email) {
-            showError('emailError', 'Please enter your email address');
-            isValid = false;
-        } else if (!isValidEmail(email)) {
-            showError('emailError', 'Please enter a valid email address');
-            isValid = false;
-        }
-        
-        // Validate message
-        if (!message) {
-            showError('messageError', 'Please enter a message');
-            isValid = false;
-        }
-        
-        if (isValid) {
-            // Simulate form submission (no actual backend)
-            showFormMessage('success', 'Thank you for your message!');
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Reset form
-            contactForm.reset();
+            // Reset previous errors and messages
+            resetFormMessages();
             
-            // Simulate sending data (in a real app, this would be an API call)
-            const formData = {
-                name: name,
-                email: email,
-                message: message,
-                timestamp: new Date().toISOString()
-            };
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
             
-            console.log('Form data would be sent to server:', formData);
-        } else {
-            showFormMessage('error', 'Please fix the errors above before submitting.');
-        }
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-    });
+            let isValid = true;
+            
+            // Validate name
+            if (!name) {
+                showError('nameError', 'Please enter your name');
+                isValid = false;
+            }
+            
+            // Validate email
+            if (!email) {
+                showError('emailError', 'Please enter your email address');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('emailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Validate message
+            if (!message) {
+                showError('messageError', 'Please enter a message');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulate form submission
+                showFormMessage('success', 'Thank you for your message!');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Simulate sending data
+                const formData = {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('Form data would be sent to server:', formData);
+            } else {
+                showFormMessage('error', 'Please fix the errors above before submitting.');
+            }
+        });
+    }
     
-    // Check for saved dark mode preference
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-        document.body.classList.add('dark-mode');
-        const icon = darkModeToggle.querySelector('i');
-        icon.className = 'fas fa-sun';
+    // Scroll effect for header
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (header) {
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05)';
+            }
+        }
+    });
+}
+
+// ===== HELPER FUNCTIONS =====
+
+function showError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
     }
 }
 
-// Initialize scroll animations
+function resetFormMessages() {
+    document.querySelectorAll('.error').forEach(el => {
+        el.style.display = 'none';
+    });
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        formMessage.style.display = 'none';
+        formMessage.className = 'form-message';
+    }
+}
+
+function showFormMessage(type, message) {
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.style.display = 'block';
+        
+        // Auto-hide success message after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }
+    }
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// ===== SCROLL ANIMATIONS =====
+
 function initScrollAnimations() {
-    // Add visible class to team members and projects when scrolled into view
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -311,39 +421,3 @@ function initScrollAnimations() {
         observer.observe(el);
     });
 }
-
-// Helper functions
-function showError(elementId, message) {
-    const errorElement = document.getElementById(elementId);
-    errorElement.textContent = message;
-    errorElement.style.display = 'block';
-}
-
-function resetFormMessages() {
-    document.querySelectorAll('.error').forEach(el => {
-        el.style.display = 'none';
-    });
-    formMessage.style.display = 'none';
-    formMessage.className = 'form-message';
-}
-
-function showFormMessage(type, message) {
-    formMessage.textContent = message;
-    formMessage.className = `form-message ${type}`;
-    formMessage.style.display = 'block';
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Add scroll effect to header
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05)';
-    }
-});
