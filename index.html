@@ -1,126 +1,303 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group 1 | Website Making</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>MALRV Tech - Your Vision, Our Code</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-    <div class="container nav-container">
-        <a href="#" class="logo">
-            <i class="fas fa-bolt"></i> Group 1
-        </a>
-        
-        <div class="nav-links" id="navLinks">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#team" class="nav-link">Team</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <button class="dark-mode-toggle" id="darkModeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-        
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-</header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <!-- Night Mode Overlay -->
+    <div class="night-mode-overlay" aria-hidden="true"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" aria-label="Main navigation">
         <div class="container">
-            <h1>GROUP 1</h1>
-            <p>We're a team of IT students who enjoy creating websites, systems, and digital solutions. We focus on making our work fast, accessible, and visually appealing. Every project is a chance for us to learn, grow, and explore new technologies together</p>
-            <div class="hero-btns">
-                <a href="#projects" class="btn">View Our Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <a href="#home" class="logo" aria-label="MALRV Tech - Home">
+                <img src="images/malrv-logo.png" alt="MALRV Tech Logo" loading="lazy">
+                <span>MALRV<span class="accent">Tech</span></span>
+            </a>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#home" role="menuitem">Home</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#team" role="menuitem">Team</a></li>
+                <li role="none"><a href="#portfolio" role="menuitem">Portfolio</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <!-- Night Mode Toggle -->
+                <div class="night-mode-toggle">
+                    <input type="checkbox" id="nightModeToggle" class="night-mode-checkbox" aria-label="Toggle dark mode">
+                    <label for="nightModeToggle" class="night-mode-label">
+                        <i class="fas fa-moon night-icon" aria-hidden="true"></i>
+                        <i class="fas fa-sun day-icon" aria-hidden="true"></i>
+                        <span class="night-mode-slider"></span>
+                    </label>
+                    <span class="night-mode-text">Dark Mode</span>
+                </div>
+                <button class="menu-btn" aria-label="Open menu" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-    </section>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu" role="navigation">
+            <div class="mobile-menu-header">
+                <span class="mobile-menu-title">Menu</span>
+                <button class="mobile-menu-close" aria-label="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="mobile-nav-links" role="menubar">
+                <li role="none"><a href="#home" role="menuitem"><i class="fas fa-home"></i> Home</a></li>
+                <li role="none"><a href="#about" role="menuitem"><i class="fas fa-info-circle"></i> About</a></li>
+                <li role="none"><a href="#team" role="menuitem"><i class="fas fa-users"></i> Team</a></li>
+                <li role="none"><a href="#portfolio" role="menuitem"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+                <li role="none"><a href="#contact" role="menuitem"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li class="mobile-night-mode">
+                    <div class="mobile-night-mode-toggle">
+                        <span><i class="fas fa-moon"></i> Dark Mode</span>
+                        <input type="checkbox" id="mobileNightModeToggle" class="mobile-night-mode-checkbox" aria-label="Toggle dark mode (mobile)">
+                        <label for="mobileNightModeToggle" class="mobile-night-mode-label">
+                            <span class="mobile-night-mode-slider"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+            <div class="mobile-menu-footer">
+                <p>Your Vision, Our Code</p>
+                <nav class="mobile-social-icons" aria-label="Social media">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Hero Section (photo-based layout) -->
+        <section class="hero-photo" id="home">
+            <div class="wrap hero-grid">
+                <div class="hero-left">
+                    <h1 class="hero-title">Your Vision,<br><span class="hero-strong">Our Code.</span></h1>
+
+                    <div class="hero-card">
+                        <p>We're a team of IT students who enjoy creating websites, systems, and digital solutions. We focus on making our work fast, accessible, and visually appealing. Every project is a chance for us to learn, grow, and explore new technologies together.</p>
+                    </div>
+
+                    <div class="services">
+                        <div class="service">
+                            <i class="fas fa-wrench icon"></i>
+                            <i class="fa-solid fa-computer"></i>
+                                <span>Website Maintenance</span>
+                             </div>
+                                <div class="service">
+                                <i class="fas fa-code icon"></i>
+                                <i class="fa-solid fa-computer"></i>
+                                <span>Website Development</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-ctas">
+                        <a class="btn primary" href="#portfolio">View our Work</a>
+                        <a class="btn ghost" href="#contact">Get in Touch</a>
+                    </div>
+                </div>
+
+                <div class="hero-right" aria-hidden="true"></div>
+            </div>
+        </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
+    <section class="about" id="about">
         <div class="container">
-            <h2>About Our Agency</h2>
+            <div class="section-header">
+                <h2>About Our Agency</h2>
+                <h3>We Transform Ideas Into Digital Reality</h3>
+            </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>We Transform Ideas Into Digital Reality</h3>
-                    <p>We are a group of students working together with one goal: to learn, collaborate, and deliver the best results we can. Each member contributes unique strengths — from leadership and creativity to research, writing, and problem-solving. We believe in teamwork, respect, and helping each other grow both academically and personally. Together, we strive to create quality outputs while building friendships along the way.</p>
-                    <a href="#team" class="btn">Meet Our Team</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT067L0bAzJTKZGWJZQbYPZe7IXLphlAlLjLrlaP7grfKaMEi1hNZokPhXjxHNncLEhJZg&usqp=CAU" alt="Our team collaborating">
+                    <p>We are a group of students working together with one goal: to learn, collaborate, and deliver the best results we can.</p>
+                    <p>Each member contributes unique strengths from leadership and creativity to research, writing, and problem-solving. We believe in teamwork, respect, and helping each other grow both academically and personally.</p>
+                    <p>Together, we strive to create quality outputs while building friendships along the way.</p>
+                    <a href="#team" class="btn primary">Meet our Team <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section class="section team" id="team">
+    <section class="team" id="team">
         <div class="container">
-            <h2>Meet Our Team</h2>
-            <div class="team-grid" id="teamContainer">
-                <!-- Team members will be dynamically inserted here -->
+            <div class="section-header">
+                <h2>MALRV Tech's Team</h2>
+                <h3>Meet Our Dedicated Team Members</h3>
+            </div>
+            <div class="team-grid">
+                <!-- Mark -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/mark.jpg" alt="Mark Emmanuel Mallari" loading="lazy">
+                        <div class="member-overlay" aria-hidden="true">
+                            <div class="social-icons"></div>
+                        </div>
+                    </div>
+                    <h3 class="member-name">Mark Emmanuel Mallari</h3>
+                    <p class="member-role">Project Manager</p>
+                    <p class="member-desc">Mark manages project schedules, aligns team objectives, and ensures projects are completed on time and within scope.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">MS Office</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Creativity</span>
+                        <span class="skill-tag">Project Management</span>
+                    </div>
+                </div>
+
+                <!-- Denzel -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/denzel.jpg" alt="Denzel Johann Alcantara" loading="lazy">
+                        <div class="member-overlay" aria-hidden="true">
+                            <div class="social-icons"></div>
+                        </div>
+                    </div>
+                    <h3 class="member-name">Denzel Johann Alcantara</h3>
+                    <p class="member-role">Web Developer</p>
+                    <p class="member-desc">Denzel develops and maintains responsive websites, ensures functionality through testing, and supports our digital projects.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Programming</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Attention to Detail</span>
+                    </div>
+                </div>
+
+                <!-- Erika -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/erika.jpg" alt="Erika Hagos Leron" loading="lazy">
+                        <div class="member-overlay" aria-hidden="true">
+                            <div class="social-icons"></div>
+                        </div>
+                    </div>
+                    <h3 class="member-name">Erika Hagos Leron</h3>
+                    <p class="member-role">Brand Planner</p>
+                    <p class="member-desc">Erika plans and manages brand strategies, ensures consistent brand positioning, and guides the overall brand vision for our projects.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Leadership</span>
+                        <span class="skill-tag">Programming</span>
+                        <span class="skill-tag">MS Office</span>
+                        <span class="skill-tag">Adaptability</span>
+                    </div>
+                </div>
+
+                <!-- Faith -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/faith.jpg" alt="Faith Nicole Viloria" loading="lazy">
+                        <div class="member-overlay" aria-hidden="true">
+                            <div class="social-icons"></div>
+                        </div>
+                    </div>
+                    <h3 class="member-name">Faith Nicole Viloria</h3>
+                    <p class="member-role">Graphic Designer</p>
+                    <p class="member-desc">Faith creates engaging visual designs, ensures brand consistency, and delivers polished graphic assets across our projects.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MS Office</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">Time Management</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
-    <section class="section" id="projects">
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
         <div class="container">
-            <h2>Our Portfolio</h2>
-            <div class="filter-btns">
+            <div class="section-header">
+                <h2>Our Portfolio</h2>
+                <h3>Digital Solutions That Deliver Results</h3>
+            </div>
+            <div class="portfolio-filter">
                 <button class="filter-btn active" data-filter="all">All Projects</button>
                 <button class="filter-btn" data-filter="excel">Excel</button>
-                <button class="filter-btn" data-filter="powerpoint">Powerpoint</button>
+                <button class="filter-btn" data-filter="powerpoint">PowerPoint</button>
                 <button class="filter-btn" data-filter="word">Word</button>
             </div>
-            <div class="project-grid" id="projectContainer">
-                <!-- Projects will be dynamically inserted here -->
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="excel">
+                    <div class="portfolio-icon" aria-hidden="true">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3>Excel Grading System</h3>
+                    <p>Automated grading system with analytics dashboard</p>
+                </div>
+                <div class="portfolio-item" data-category="powerpoint">
+                    <div class="portfolio-icon" aria-hidden="true">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3>Animation & Transitions</h3>
+                    <p>Dynamic presentations with custom animations</p>
+                </div>
+                <div class="portfolio-item" data-category="word">
+                    <div class="portfolio-icon" aria-hidden="true">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+                    <h3>The Work Resume</h3>
+                    <p>Professional templates with smart formatting</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact" id="contact">
+    <section class="contact" id="contact">
         <div class="container">
-            <h2>Get In Touch</h2>
-            <div class="contact-container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <h3>Let's Start a Conversation</h3>
+            </div>
+            <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Let's Start a Conversation</h3>
-                    <p>Have a project in mind? We'd love to hear about it. Send us a message and we'll respond as soon as possible.</p>
-                    <div style="margin-top: 30px;">
-                        <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@group1.dev</p>
-                        <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</p>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Cavite State University Tanza Campus</p>
+                    <p class="contact-desc">Have a project in mind? We'd love to hear about it. Send us a message and we'll respond as soon as possible.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div>
+                                <h4>Email Address</h4>
+                                <a href="mailto:malrv@group1.dev">malrv@group1.dev</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="messageForm">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Your Name">
-                            <div class="error" id="nameError">Please enter your name</div>
+                            <label for="contactName">Your Name</label>
+                            <input type="text" id="contactName" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="your.email@example.com">
-                            <div class="error" id="emailError">Please enter a valid email address</div>
+                            <label for="contactEmail">Email Address</label>
+                            <input type="email" id="contactEmail" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" class="form-control" rows="5" placeholder="Tell us about your project..."></textarea>
-                            <div class="error" id="messageError">Please enter a message</div>
+                            <label for="contactMessage">Your Message</label>
+                            <textarea id="contactMessage" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
-                        <div class="form-message" id="formMessage"></div>
+                        <button type="submit" class="btn primary">Send Message <i class="fas fa-paper-plane" aria-hidden="true"></i></button>
                     </form>
                 </div>
             </div>
@@ -128,24 +305,37 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <a href="#" class="logo" style="color: white; justify-content: center; margin-bottom: 20px;">
-                <i class="fas fa-bolt"></i> Group 1
-            </a>
-            <p>Building the future of digital experiences, one project at a time.</p>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#team">Team</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#home" class="logo" aria-label="MALRV Tech - Home">MALRV<span>Tech</span></a>
+                    <p>Your Vision, Our Code.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <nav class="quick-links" aria-label="Footer quick links">
+                        <ul class="quick-links-list">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#team">Team</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2025 Group 1. All rights reserved. | This is a group project for educational purposes.
+            <div class="footer-bottom">
+                <p>&copy; 2026 MALRV Tech. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart" aria-hidden="true"></i> by GROUP 1 IT students</p>
             </div>
         </div>
     </footer>
+
+    <div class="night-mode-indicator" aria-live="polite" aria-atomic="true">
+        <i class="fas fa-check-circle"></i>
+        <span></span>
+    </div>
 
     <script src="script.js"></script>
 </body>
