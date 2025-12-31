@@ -148,23 +148,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-const mobileToggle = document.querySelector('.mobile-night-mode-checkbox');
-mobileToggle.addEventListener('change', () => {
-    document.body.classList.toggle('night-mode', mobileToggle.checked);
-    mobileMenu.classList.toggle('night-mode', mobileToggle.checked);
-});
-document.getElementById('messageForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('contactEmail').value;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const messageForm = document.getElementById('messageForm');
+    if (messageForm) {
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // stop reload
 
-    if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address (e.g., user@domain.com).");
-        return;
-    }
+            const email = document.getElementById('contactEmail').value;
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    alert("Thank you! Your message has been received.");
-    this.reset();
-});
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address (e.g., user@domain.com).");
+                return;
+            }
+
+            alert("Thank you! Your message has been received.");
+            this.reset();
+        }); 
+    }     
+
 
 
