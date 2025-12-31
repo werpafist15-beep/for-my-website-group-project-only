@@ -5,38 +5,36 @@
     box-sizing: border-box;
 }
 
-/* Prevent accidental horizontal scroll from visual decorations */
 html, body {
     overflow-x: hidden;
 }
 
-/* Safety: prevent layout from exceeding viewport width */
 html, body {
     max-width: 100vw;
 }
 
 :root {
     /* Primary design tokens - extracted from color palette reference */
-    --primary: #3F2A52; /* JACARTA - deep purple */
-    --muted: #75619D;   /* DARK BLUE-GRAY - muted purple-gray */
-    --accent: #BEADBB;  /* WISTERIA - light lavender */
+    --primary: #3F2A52; 
+    --muted: #75619D;   
+    --accent: #BEADBB;  
     --bg: #FFFFFF;
-    --card-bg: #E6EFF7; /* BRIGHT GRAY - very light blue-gray */
-    --text-dark: #3A2D34; /* BLACK COFFEE - dark brown-black for text */
-    --text-muted: #75619D; /* matches DARK BLUE-GRAY for muted text */
+    --card-bg: #E6EFF7; 
+    --text-dark: #3A2D34; 
+    --text-muted: #75619D; 
     --hero-overlay: rgba(63,42,82,0.45);
-    --hero-bg: url('images/hero-bg.jpg'); /* Isometric tech/dashboard illustration */
+    --hero-bg: url('images/hero-bg.jpg'); 
 
     /* Dark mode complementary colors */
-    --dark-bg: #1a1620; /* very dark purple-black background */
-    --dark-card: #2d2535; /* dark purple-gray for cards */
-    --dark-text: #e8e0e8; /* off-white for readability */
-    --dark-text-light: #b8adb8; /* muted light text */
-    --dark-accent: #d4a5d4; /* lighter lavender for dark mode */
-    --dark-primary: #7d5fa5; /* brighter purple for buttons in dark mode */
-    --dark-border: #3d3545; /* subtle borders in dark mode */
+    --dark-bg: #1a1620; 
+    --dark-card: #2d2535; 
+    --dark-text: #e8e0e8; 
+    --dark-text-light: #b8adb8; 
+    --dark-accent: #d4a5d4; 
+    --dark-primary: #7d5fa5; 
+    --dark-border: #3d3545; 
 
-    /* Backwards-compatible aliases used throughout the stylesheet */
+    
     --jacarta: var(--primary);
     --blue-gray: var(--muted);
     --wisteria: var(--accent);
@@ -140,7 +138,9 @@ h1, h2, h3, h4 {
     align-items: center;
     gap: 8px;
 }
-
+.white-img {
+  filter: invert(1);
+}
 .logo img {
     width: 80px;
     height: auto;
@@ -176,7 +176,7 @@ h1, h2, h3, h4 {
 /* Link accessibility & touch targets */
 .nav-links a, .mobile-nav-links a {
     display: inline-block;
-    padding: 8px 10px; /* larger tap target */
+    padding: 8px 10px; 
     cursor: pointer;
 }
 .nav-links a:hover, .mobile-nav-links a:hover {
@@ -188,9 +188,7 @@ h1, h2, h3, h4 {
     outline-offset: 3px;
 }
 .nav-links a.active, .mobile-nav-links a.active {
-    /* When a link is clicked, it receives the 'active' class which applies this color */
-    /* The color persists until another link is clicked (see script.js: setActiveLinkForSection) */
-    color: var(--muted); /* DARK BLUE-GRAY - #75619D from your palette */
+    color: var(--muted); 
     font-weight: 700;
     border-bottom: 3px solid var(--muted);
     padding-bottom: 5px;
@@ -1278,6 +1276,13 @@ body.night-mode {
 .night-mode .portfolio-item:hover {
     border-color: var(--wisteria);
 }
+.night-mode .portfolio-item h3 {
+    color: var(--dark-text); 
+}
+
+.night-mode .portfolio-item p {
+    color: var(--dark-text-light); 
+}
 
 .night-mode .contact-form {
     background-color: var(--dark-card);
@@ -1449,7 +1454,6 @@ body.night-mode .night-mode-overlay {
 .night-mode-indicator i {
     font-size: 18px;
 }
-
 /* Mobile Menu Styles */
 .mobile-menu {
     position: fixed;
@@ -1666,20 +1670,31 @@ body.night-mode .night-mode-overlay {
 /* Mobile Backdrop */
 .mobile-menu-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .mobile-menu-backdrop.show {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
+}
+.mobile-menu {
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+.mobile-menu:not(.show) {
+    pointer-events: none;
+}
+
+.mobile-nav-links a {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 /* System Preference Detection */
@@ -1718,15 +1733,9 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 html {
-  scroll-behavior: smooth; /* optional fallback */
+  scroll-behavior: smooth; 
 }
-
-/* ======================================
-   Hero photo section styles (patched in)
-   - Uses `hero-photo`, `hero-grid`, `hero-left`, and `hero-right`
-   - Place hero image at `images/hero-bg.jpg`
-====================================== */
-
+/* Hero Section Styles */
 :root {
     --hero-bg: url('images/hero-bg.jpg');
     --hero-primary: #3f2a62;
@@ -1735,7 +1744,7 @@ html {
 
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; box-sizing: border-box; }
 
-/* Make media scale to container to avoid overflow */
+
 img, svg, picture, video {
     max-width: 100%;
     height: auto;
@@ -1750,15 +1759,14 @@ img, svg, picture, video {
     padding-top: 240px;
     padding-bottom: 40px;
     background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%);
-    overflow: hidden; /* ensure decorative elements don't push layout */
+    overflow: hidden; 
 }
 
 .hero-grid {
     display: grid;
-    /* Use minmax to allow the second column to shrink without forcing overflow */
     grid-template-columns: 1fr 1.2fr;
-    gap: 20px; /* slightly reduced gap to improve fit on smaller viewports */
-    align-items: stretch; /* ensure both columns stretch to same height */
+    gap: 20px; 
+    align-items: stretch; 
     width: 100%;
 }
 
@@ -1779,7 +1787,7 @@ img, svg, picture, video {
 
 .hero-right { height: 120%; align-self: stretch; border-radius: 28px; background-image: var(--hero-bg); background-size: cover; background-position: center 30%; background-repeat: no-repeat; box-shadow: 0 30px 60px rgba(63,42,98,0.18); position:relative; overflow:visible; margin-left:auto; max-width: 100%; width:100%; box-sizing:border-box; transform: translateZ(0); align-self: start; margin-top: 10px; clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%); }
 .hero-right { background-attachment: fixed; }
-/* Prevent the hero-right pseudo element from creating overflow */
+
 .hero-right::before, .hero-photo::after {
     backface-visibility: hidden;
 }
@@ -1814,4 +1822,92 @@ img, svg, picture, video {
     .hero-right { height: 220px; border-radius: 14px; margin-top: 18px }
     .hero-card { padding: 14px; border-radius: 12px }
     .brand { color: var(--jacarta) }
+}
+/* Fix for mobile menu being blocked by other layers */
+.mobile-menu {
+    z-index: 10001 !important; 
+}
+
+.mobile-nav-links a {
+    position: relative;
+    z-index: 10002;
+    pointer-events: auto !important;
+    display: block;
+    width: 100%;
+}
+
+.mobile-menu-backdrop {
+    z-index: 10000 !important;
+}
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+.hero-photo {
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Decorative clipped background element */
+.hero-photo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0; 
+    width: 60%; 
+    height: 100%;
+    background-image: var(--hero-bg);
+    background-size: cover;
+    background-position: center;
+    
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1; 
+}
+
+
+.hero-left {
+    position: relative;
+    z-index: 2; 
+    max-width: 550px;
+}
+
+.hero-right {
+    display: none;
+}
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border: 2px solid var(--primary-light);
+    background: transparent;
+    color: var(--text-main);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* The "Active" state from your image */
+.filter-btn.active {
+    background: var(--primary-light);
+    color: rgb(117, 97, 157);
+    border-color: var(--primary-light);
+}
+
+/* Smooth hiding animation */
+.portfolio-item {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.portfolio-item.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
 }
