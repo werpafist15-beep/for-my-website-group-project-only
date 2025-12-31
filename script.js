@@ -148,16 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-function closeMenu() {
-    mobileMenu.classList.remove('show');
-}
 const mobileToggle = document.querySelector('.mobile-night-mode-checkbox');
 mobileToggle.addEventListener('change', () => {
     document.body.classList.toggle('night-mode', mobileToggle.checked);
     mobileMenu.classList.toggle('night-mode', mobileToggle.checked);
 });
 document.getElementById('messageForm').addEventListener('submit', function(e) {
-    e.preventDefault();
     
     const email = document.getElementById('contactEmail').value;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -170,3 +166,4 @@ document.getElementById('messageForm').addEventListener('submit', function(e) {
     alert("Thank you! Your message has been received.");
     this.reset();
 });
+
