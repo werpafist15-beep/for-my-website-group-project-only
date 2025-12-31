@@ -1951,10 +1951,5 @@ html {
     width: 100%;
   }
 }
-@media (max-width: 768px) {
-  .hero-photo::before,
-  .hero-photo::after {
-    display: none;
-  }
-}
+
 
