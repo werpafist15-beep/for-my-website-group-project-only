@@ -165,6 +165,105 @@ document.addEventListener('DOMContentLoaded', () => {
             this.reset();
         }); 
     }     
+// Portfolio Lightbox Functionality
+class PortfolioLightbox {
+    constructor() {
+        this.modal = null;
+        this.modalImg = null;
+        this.currentIndex = 0;
+        this.images = [];
+        this.init();
+    }
+
+    init() {
+        // Create modal elements
+        this.createModal();
+        
+        // Attach click events to view-full buttons
+        document.querySelectorAll('.view-full').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const fullImageSrc = button.getAttribute('href');
+                this.open(fullImageSrc);
+            });
+        });
+        
+        // Also make portfolio images clickable
+        document.querySelectorAll('.portfolio-image img').forEach(img => {
+            img.addEventListener('click', () => {
+                const parent = img.closest('.portfolio-item');
+                const fullImageLink = parent.querySelector('.view-full');
+                if (fullImageLink) {
+                    const fullImageSrc = fullImageLink.getAttribute('href');
+                    this.open(fullImageSrc);
+                }
+            });
+        });
+    }
+
+    createModal() {
+        // Create modal structure
+        this.modal = document.createElement('div');
+        this.modal.className = 'portfolio-modal';
+        this.modal.innerHTML = `
+            <div class="modal-content">
+                <button class="modal-close" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="" alt="Portfolio project screenshot">
+            </div>
+        `;
+        
+        document.body.appendChild(this.modal);
+        
+        // Get references
+        this.modalImg = this.modal.querySelector('img');
+        const closeBtn = this.modal.querySelector('.modal-close');
+        
+        // Close modal on X click
+        closeBtn.addEventListener('click', () => this.close());
+        
+        // Close modal on background click
+        this.modal.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
+                this.close();
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.close();
+            }
+        });
+    }
+
+    open(imageSrc) {
+        this.modalImg.src = imageSrc;
+        this.modalImg.alt = 'Portfolio project full-size view';
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    close() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+        // Clear src after animation to prevent image flash on next open
+        setTimeout(() => {
+            this.modalImg.src = '';
+        }, 300);
+    }
+}
+
+// Update your DOMContentLoaded event to include the lightbox
+document.addEventListener('DOMContentLoaded', () => {
+    new NightMode();
+    new MobileMenu();
+    new PortfolioLightbox(); // Add this line
+    
+    // ... rest of your existing code ...
+});
+
 
 
 
