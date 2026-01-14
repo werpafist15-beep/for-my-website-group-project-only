@@ -1951,5 +1951,242 @@ html {
     width: 100%;
   }
 }
+/* Portfolio Image Styles */
+.portfolio-item {
+    background-color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.night-mode .portfolio-item {
+    background-color: var(--dark-card);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover .portfolio-image img {
+    transform: scale(1.05);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(63, 42, 98, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.view-full {
+    width: 50px;
+    height: 50px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--jacarta);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.view-full:hover {
+    background-color: var(--wisteria);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.portfolio-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-icon {
+    font-size: 2.5rem;
+    color: var(--wisteria);
+    margin-bottom: 15px;
+}
+
+.portfolio-item h3 {
+    color: var(--jacarta);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.night-mode .portfolio-item h3 {
+    color: var(--white);
+}
+
+.portfolio-item p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.night-mode .portfolio-item p {
+    color: var(--dark-text-light);
+}
+
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--wisteria);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+    color: var(--jacarta);
+    gap: 12px;
+}
+
+.night-mode .btn-link {
+    color: var(--dark-accent);
+}
+
+.night-mode .btn-link:hover {
+    color: var(--white);
+}
+
+/* Portfolio Grid Layout */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Modal/Lightbox Styles */
+.portfolio-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.portfolio-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.night-mode .modal-content {
+    background: var(--dark-card);
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .portfolio-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-item {
+        margin-bottom: 20px;
+    }
+    
+    .portfolio-image {
+        height: 180px;
+    }
+    
+    .portfolio-content {
+        padding: 20px;
+    }
+}
 
 
